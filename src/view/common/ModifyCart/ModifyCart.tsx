@@ -1,18 +1,20 @@
-import {useState} from 'react';
-import {useDispatch} from "react-redux";
-import type {AppDispatch} from "../../../store/store.ts";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {decreaseQuantity, increaseQuantity} from "../../../slices/cartSlice.ts";
 import type {ProductData} from "../../../model/ProductData.ts";
 
 interface ModifyCartProps {
-    data: {product: ProductData};
+    data: { product: ProductData };
 }
 
 export function ModifyCart({data}: ModifyCartProps) {
 
     const dispatch = useDispatch<AppDispatch>();
 
-    const [itemCount, setItemCount] = useState(1);
+    /*const [itemCount, setItemCount] = useState(1);*/
+
+    const item = useSelector((state: RootState) => state.cart.items.find(
+        cartItem => cartItem.product.id === data.product.id))
 
     // remove use effect
     /*useEffect(() => {
@@ -31,8 +33,8 @@ export function ModifyCart({data}: ModifyCartProps) {
     }, [itemCount, data]);*/
 
     const increaseItemCount = () => {
-        setItemCount((prev) => prev + 1);
-        dispatch(increaseQuantity(data.product.id))
+        // setItemCount((prev) => prev + 1);
+        dispatch(increaseQuantity(data.product.id));
     };
 
     const decreaseItemCount = () => {
@@ -41,8 +43,8 @@ export function ModifyCart({data}: ModifyCartProps) {
             return;
         }
         setQuantity(prev => (prev > 1 ? prev - 1 : 1));*/
-        if (itemCount > 1) {
-            setItemCount((prev) => prev - 1);
+        if (item && item.itemCount > 1) {
+            // setItemCount((prev) => prev - 1);
             dispatch(decreaseQuantity(data.product.id));
         } else {
             alert('Quantity cannot be less than 1');
@@ -56,7 +58,7 @@ export function ModifyCart({data}: ModifyCartProps) {
                 onClick={decreaseItemCount}>-
             </button>
             <small className="text-sm font-medium text-gray-800 w-8 text-center">
-                {itemCount}
+                {item?.itemCount}   {/*to display the itemCount*/}
             </small>
             <button
                 className="bg-blue-600 text-white w-8 h-8 rounded-full hover:bg-blue-500 transition duration-200 text-lg font-semibold"

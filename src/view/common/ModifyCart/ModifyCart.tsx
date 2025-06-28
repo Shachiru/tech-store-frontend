@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import type {CartItem} from "../../../model/CartItem.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../../store/store.ts";
 import {decreaseQuantity, increaseQuantity} from "../../../slices/cartSlice.ts";
@@ -8,8 +7,6 @@ import type {ProductData} from "../../../model/ProductData.ts";
 interface ModifyCartProps {
     data: {product: ProductData};
 }
-
-export const itemsList: CartItem[] = [];
 
 export function ModifyCart({data}: ModifyCartProps) {
 
@@ -33,7 +30,7 @@ export function ModifyCart({data}: ModifyCartProps) {
 
     }, [itemCount, data]);*/
 
-    const handleIncrement = () => {
+    const increaseItemCount = () => {
         setItemCount((prev) => prev + 1);
         dispatch(increaseQuantity(data.product.id))
     };
@@ -63,7 +60,7 @@ export function ModifyCart({data}: ModifyCartProps) {
             </small>
             <button
                 className="bg-blue-600 text-white w-8 h-8 rounded-full hover:bg-blue-500 transition duration-200 text-lg font-semibold"
-                onClick={handleIncrement}>+
+                onClick={increaseItemCount}>+
             </button>
         </div>
     );

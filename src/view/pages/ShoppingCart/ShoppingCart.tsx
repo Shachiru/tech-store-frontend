@@ -1,10 +1,9 @@
-import type {CartItem} from "../../../model/CartItem.ts";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../../store/store.ts";
 
-interface ShoppingCartProps {
-    itemsList: CartItem[];
-}
+export function ShoppingCart() {
+    const {items} = useSelector((state: RootState) => state.cart)   // Access the cart from the store
 
-export function ShoppingCart({itemsList}: ShoppingCartProps) {
     return (
         <div className="flex justify-center items-center px-6 py-8">
             <div className="w-full max-w-5xl shadow-xl rounded-2xl overflow-hidden bg-white">
@@ -20,14 +19,14 @@ export function ShoppingCart({itemsList}: ShoppingCartProps) {
                     </thead>
                     <tbody>
                     {
-                        itemsList.length === 0 ? (
+                        items.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="p-6 bg-gray-50">
                                     <p className="text-center text-base text-gray-600 font-medium">No Items in Cart</p>
                                 </td>
                             </tr>
                         ) : (
-                            itemsList.map((item, index) => (
+                            items.map((item, index) => (
                                 <tr key={item.product.id}
                                     className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} 
                                     hover:bg-indigo-50 transition-colors duration-200 border-b border-gray-200`}>

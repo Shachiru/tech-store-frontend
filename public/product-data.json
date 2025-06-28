@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "AirPods Pro",
+    "price": 80,
+    "currency": "USD",
+    "image": "air-pod.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Apple Watch",
+    "price": 150,
+    "currency": "USD",
+    "image": "watch.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Air Tag",
+    "price": 55,
+    "currency": "USD",
+    "image": "air-tag.jpg"
+  }
+]

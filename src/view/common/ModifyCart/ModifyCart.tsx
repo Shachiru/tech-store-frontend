@@ -3,9 +3,10 @@ import type {CartItem} from "../../../model/CartItem.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../../store/store.ts";
 import {decreaseQuantity, increaseQuantity} from "../../../slices/cartSlice.ts";
+import type {ProductData} from "../../../model/ProductData.ts";
 
 interface ModifyCartProps {
-    data: any;
+    data: {product: ProductData};
 }
 
 export const itemsList: CartItem[] = [];
@@ -34,7 +35,7 @@ export function ModifyCart({data}: ModifyCartProps) {
 
     const handleIncrement = () => {
         setItemCount((prev) => prev + 1);
-        dispatch(increaseQuantity(data.id))
+        dispatch(increaseQuantity(data.product.id))
     };
 
     const decreaseItemCount = () => {
@@ -45,7 +46,7 @@ export function ModifyCart({data}: ModifyCartProps) {
         setQuantity(prev => (prev > 1 ? prev - 1 : 1));*/
         if (itemCount > 1) {
             setItemCount((prev) => prev - 1);
-            dispatch(decreaseQuantity(data.id));
+            dispatch(decreaseQuantity(data.product.id));
         } else {
             alert('Quantity cannot be less than 1');
         }

@@ -34,9 +34,7 @@ const cartSlice = createSlice({
             const item = state.items.find((existingItem) => existingItem.product.id === action.payload) // id of the product
             if (item && item.itemCount > 1) {   // if the itemCount is greater than 1
                 item.itemCount -= 1     // decrement the itemCount
-            } else {
-                alert("Item count cannot be less than 1");
-            }
+            } // else part handled in the UI (ModifyCart component)
         }
     }
 });

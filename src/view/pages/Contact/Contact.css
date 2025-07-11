@@ -1,34 +1,145 @@
-.form-container {
-    max-width: 500px;
-    margin: 40px auto;
+/* Tech Store Contact Form Styles */
+.tech-contact-container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 30px;
-    background-color: white;
-    border-radius: 12px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.contact-form {
+.tech-contact-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0f3460;
+}
+
+.tech-contact-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.tech-contact-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+.tech-contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.tech-form-group:nth-child(5) {
+    grid-column: span 2;
+}
+
+.tech-input-wrapper {
+    position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
+.tech-input-wrapper:focus-within {
+    border-color: #1a97f5;
+    box-shadow: 0 0 0 3px rgba(26, 151, 245, 0.15);
 }
 
-.submit-btn {
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
+.tech-input,
+.tech-textarea {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: #333;
+    outline: none;
+    border-radius: 8px;
 }
 
-.error {
-    color: red;
-    font-size: 0.875rem;
+.tech-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.tech-error {
+    color: #e74c3c;
+    font-size: 13px;
     margin-top: 5px;
+    display: block;
+}
+
+.tech-submit-btn {
+    grid-column: span 2;
+    background-color: #0f3460;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.tech-submit-btn:hover {
+    background-color: #1a97f5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 151, 245, 0.2);
+}
+
+.tech-contact-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.tech-info-item {
+    margin: 10px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.tech-info-item strong {
+    color: #0f3460;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tech-contact-form {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-form-group:nth-child(5) {
+        grid-column: span 1;
+    }
+
+    .tech-submit-btn {
+        grid-column: span 1;
+    }
+
+    .tech-contact-container {
+        padding: 20px;
+    }
+}
+
+/* Modern input focus effect */
+.tech-input:focus,
+.tech-textarea:focus {
+    background-color: #f0f7ff;
+}
+
+/* Placeholder color */
+::placeholder {
+    color: #aaa;
 }

@@ -1,28 +1,28 @@
 import './Contact.css';
 import { useForm } from "react-hook-form";
 import {backendApi} from "../../../api.ts";
+import type {ContactData} from "../../../model/ContactData.ts";
 
-export interface Contact {
-    id: number;
-    name: string;
-    email: string;
-    phone?: string;
-    subject: string;
-    message: string;
+type ContactProps = {
+    data?: Partial<ContactData>; // Make data optional and partial
 }
 
-export function Contact() {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<Contact>();
+type Contact = ContactData & { id?: number };
 
-    const onSubmit = async (data: Contact) => {
+export function Contact({ data = {} }: ContactProps) {
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<Contact>({
+        defaultValues: { ...data, id: data?.id } // Safely spread data and handle id
+    });
+
+    const onSubmit = async (formData: Contact) => {
         try {
-            // Generate a unique ID for the contact
-            data.id = Date.now();
+            // Generate id only if not provided
+            formData.id = formData.id ?? Date.now();
 
-            const response = await backendApi.post('/contact/save', data);
-            console.log('Contact saved:', response.data);
+            const response = await backendApi.post('/contact/save', formData);
+            console.log('ContactData saved:', response.data);
             alert('Message sent successfully!');
-            reset(); // Clear form after successful submission
+            reset();
         } catch (error) {
             console.error('Error saving contact:', error);
             alert('Failed to send message. Please try again.');

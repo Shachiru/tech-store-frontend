@@ -5,14 +5,6 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {addItemToCart} from "../../../slices/cartSlice.ts";
 
-/*type ProductData = {
-    id: number,
-    name: string,
-    price: string,
-    currency: string,
-    image: string
-}*/
-
 type ProductProps = {
     data: ProductData
 }
@@ -25,8 +17,6 @@ export function Product({data}: ProductProps) {
     const image = images[`../../../assets/products/${data.image}`];
 
     const dispatch = useDispatch<AppDispatch>();
-
-    // const [isActive, setIsActive] = useState(false);
 
     const item = useSelector((state: RootState) =>
         state.cart.items.find(cartItem => cartItem.product.id === data.id));
